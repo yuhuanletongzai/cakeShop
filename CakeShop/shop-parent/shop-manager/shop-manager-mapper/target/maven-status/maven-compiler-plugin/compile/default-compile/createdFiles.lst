@@ -1,0 +1,14 @@
+com\xzy\mapper\ManagerMapper.class
+com\xzy\mapper\PictureMapper.class
+com\xzy\mapper\OrderdetailsMapper.class
+com\xzy\mapper\PhotoMapper.class
+com\xzy\mapper\CartProductMapper.class
+com\xzy\mapper\OrdersMapper.class
+com\xzy\mapper\UsersMapper.class
+com\xzy\App.class
+com\xzy\mapper\CartMapper.class
+com\xzy\mapper\ProductDetailsMapper.class
+com\xzy\mapper\ProductKindsMapper.class
+com\xzy\mapper\UsersAddressMapper.class
+com\xzy\mapper\CollectsMapper.class
+com\xzy\mapper\ProductOrdersMapper.class

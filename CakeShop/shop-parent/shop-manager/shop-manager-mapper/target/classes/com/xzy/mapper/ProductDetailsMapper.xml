@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzy.mapper.ProductDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.xzy.pojo.ProductDetails" >
+    <id column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_kinds_id" property="productKindsId" jdbcType="BIGINT" />
+    <result column="relish" property="relish" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="sellnum" property="sellnum" jdbcType="INTEGER" />
+    <result column="sizes" property="sizes" jdbcType="INTEGER" />
+    <result column="advertisement" property="advertisement" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    product_id, product_kinds_id, relish, price, num, sellnum, sizes, advertisement, 
+    create_time, update_time, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xzy.pojo.ProductDetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_details
+    where product_id = #{productId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from product_details
+    where product_id = #{productId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xzy.pojo.ProductDetailsExample" >
+    delete from product_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xzy.pojo.ProductDetails" >
+    insert into product_details (product_id, product_kinds_id, relish, 
+      price, num, sellnum, 
+      sizes, advertisement, create_time, 
+      update_time, status)
+    values (#{productId,jdbcType=BIGINT}, #{productKindsId,jdbcType=BIGINT}, #{relish,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, #{sellnum,jdbcType=INTEGER}, 
+      #{sizes,jdbcType=INTEGER}, #{advertisement,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzy.pojo.ProductDetails" >
+    insert into product_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productKindsId != null" >
+        product_kinds_id,
+      </if>
+      <if test="relish != null" >
+        relish,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="sellnum != null" >
+        sellnum,
+      </if>
+      <if test="sizes != null" >
+        sizes,
+      </if>
+      <if test="advertisement != null" >
+        advertisement,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productKindsId != null" >
+        #{productKindsId,jdbcType=BIGINT},
+      </if>
+      <if test="relish != null" >
+        #{relish,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="sellnum != null" >
+        #{sellnum,jdbcType=INTEGER},
+      </if>
+      <if test="sizes != null" >
+        #{sizes,jdbcType=INTEGER},
+      </if>
+      <if test="advertisement != null" >
+        #{advertisement,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xzy.pojo.ProductDetailsExample" resultType="java.lang.Integer" >
+    select count(*) from product_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product_details
+    <set >
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productKindsId != null" >
+        product_kinds_id = #{record.productKindsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.relish != null" >
+        relish = #{record.relish,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellnum != null" >
+        sellnum = #{record.sellnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.sizes != null" >
+        sizes = #{record.sizes,jdbcType=INTEGER},
+      </if>
+      <if test="record.advertisement != null" >
+        advertisement = #{record.advertisement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product_details
+    set product_id = #{record.productId,jdbcType=BIGINT},
+      product_kinds_id = #{record.productKindsId,jdbcType=BIGINT},
+      relish = #{record.relish,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      num = #{record.num,jdbcType=INTEGER},
+      sellnum = #{record.sellnum,jdbcType=INTEGER},
+      sizes = #{record.sizes,jdbcType=INTEGER},
+      advertisement = #{record.advertisement,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzy.pojo.ProductDetails" >
+    update product_details
+    <set >
+      <if test="productKindsId != null" >
+        product_kinds_id = #{productKindsId,jdbcType=BIGINT},
+      </if>
+      <if test="relish != null" >
+        relish = #{relish,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="sellnum != null" >
+        sellnum = #{sellnum,jdbcType=INTEGER},
+      </if>
+      <if test="sizes != null" >
+        sizes = #{sizes,jdbcType=INTEGER},
+      </if>
+      <if test="advertisement != null" >
+        advertisement = #{advertisement,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzy.pojo.ProductDetails" >
+    update product_details
+    set product_kinds_id = #{productKindsId,jdbcType=BIGINT},
+      relish = #{relish,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      num = #{num,jdbcType=INTEGER},
+      sellnum = #{sellnum,jdbcType=INTEGER},
+      sizes = #{sizes,jdbcType=INTEGER},
+      advertisement = #{advertisement,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where product_id = #{productId,jdbcType=BIGINT}
+  </update>
+</mapper>
